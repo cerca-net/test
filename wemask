@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Connect with MetaMask</title>
+  <style>
+    #connectButton {
+      background-color: #3498db; /* Blue background */
+      color: white; /* White text */
+      padding: 10px 20px; /* Padding around the text */
+      border: none; /* Remove default border */
+      border-radius: 5px; /* Rounded corners */
+      font-size: 16px; /* Font size */
+      cursor: pointer; /* Change cursor on hover */
+    }
+
+    #connectButton:hover {
+      background-color: #2980b9; /* Darker blue on hover */
+    }
+  </style>
+</head>
+<body>
+  <button id="connectButton">Connect with MetaMask</button>
+
+  <script>
+    const connectButton = document.getElementById('connectButton');
+
+    connectButton.addEventListener('click', async () => {
+      if (typeof window.ethereum !== 'undefined') {
+        try {
+          const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
+          const walletAddress = accounts[0];
+
+          // Send the wallet address to FlutterFlow using postMessage
+          window.postMessage({ type: 'walletAddress', address: walletAddress }, '*');
+
+        } catch (error) {
+          console.error('Error connecting with MetaMask:', error);
+        }
+      } else {
+        alert('MetaMask is not installed!');
+      }
+    });
+  </script>
+</body>
+</html>

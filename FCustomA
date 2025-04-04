@@ -1,0 +1,73 @@
+// Automatic FlutterFlow imports
+import '/flutter_flow/flutter_flow_theme.dart';
+import '/flutter_flow/flutter_flow_util.dart';
+import '/custom_code/actions/index.dart'; // Imports other custom actions
+import '/flutter_flow/custom_functions.dart'; // Imports custom functions
+import 'package:flutter/material.dart';
+// Begin custom action code
+// DO NOT REMOVE OR MODIFY THE CODE ABOVE!
+
+import 'package:reown_walletkit/reown_walletkit.dart';
+
+Future<String?> connectWallet() async {
+  final _walletKit = ReownWalletKit(
+    core: ReownCore(
+      projectId: '1e72c620f50d03a752e4be386fbd1bbf',
+    ),
+    metadata: PairingMetadata(
+      name: 'My FlutterFlow Wallet',
+      description: 'A Web3 wallet built with FlutterFlow.',
+      url: 'https://ttttttttttttttt-xy4wgl.flutterflow.app',
+      icons: ['https://via.placeholder.com/150'],
+      redirect: Redirect(
+        native: 'metamask://',
+        universal: 'https://metamask.app.link/',
+      ),
+    ),
+  );
+
+  try {
+    final session = await _walletKit.connect();
+    if (session.accounts.isNotEmpty) {
+      return session.accounts[0]; // Return the first wallet address
+    }
+  } catch (e) {
+    debugPrint("WalletConnect Error: $e");
+    return null;
+  }
+  return null;
+}
+
+Future<String?> connectWallet() async {
+  final _walletKit = ReownWalletKit(
+    core: ReownCore(
+      projectId: 'your_actual_project_id_here',
+    ),
+    metadata: PairingMetadata(
+      name: 'My FlutterFlow Wallet',
+      description: 'A Web3 wallet built with FlutterFlow.',
+      url: 'https://your-app-placeholder.com/', // Your app's website
+      icons: [
+        'https://via.placeholder.com/150'
+      ], // Use a placeholder or real logo
+      redirect: Redirect(
+        native: 'metamask://', // Default to MetaMask for now
+        universal: 'https://metamask.app.link/', // Fallback universal link
+      ),
+    ),
+  );
+
+  try {
+    final session = await _walletKit.connect();
+    if (session.accounts.isNotEmpty) {
+      return session.accounts[0]; // Return first wallet address
+    }
+  } catch (e) {
+    debugPrint("WalletConnect Error: $e");
+    return null;
+  }
+  return null;
+}
+
+// Set your action name, define your arguments and return parameter,
+// and then add the boilerplate code using the green button on the right!
